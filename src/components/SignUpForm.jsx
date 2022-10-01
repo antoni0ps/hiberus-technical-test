@@ -1,6 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { signUp } from '../services/authService'
+import { Link, useNavigate } from 'react-router-dom'
+
 
 const RegisterForm = () => {
   const [name, setName] = useState('')
@@ -13,6 +15,8 @@ const RegisterForm = () => {
   const handleChangeEmail = (event) => setEmail(event.target.value)
   const handleChangePassword = (event) => setPassword(event.target.value)
 
+  const navigate = useNavigate();
+
   const handleSignUp = (name, surname, email, password) => (event) => {
     event.preventDefault();
     signUp({
@@ -20,7 +24,9 @@ const RegisterForm = () => {
       surname,
       email,
       password
-    })
+    }).then(
+      navigate('/')
+    )
   }
 
   return (
@@ -30,7 +36,9 @@ const RegisterForm = () => {
           <h3 className="form-title">Regístrate</h3>
           <div className="text-center">
             ¿Ya estás registrado?{' '}
-            <span className="link-primary">Inicia Sesión</span>
+            <Link to="/">
+              <span className="link-primary">Inicia Sesión</span>
+            </Link>
           </div>
           <Form.Group className="mt-3">
             <label>Nombre</label>

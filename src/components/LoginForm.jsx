@@ -49,7 +49,7 @@ const LoginForm = () => {
           <h3 className="form-title">Inicia Sesión</h3>
           <div className="text-center">
             ¿Todavía no te has registrado?{' '}
-            <Link to="signUp" element={<SignUpForm />}>
+            <Link to="signUp">
               <span className="link-primary">Hazlo Aquí</span>
               </Link>
           </div>
@@ -72,7 +72,6 @@ const LoginForm = () => {
             />
           </Form.Group>
 
-          {/* <Link to="/user-list"> */}
             <Button type="submit" onClick={handleLogin} className="btn btn-primary mb-2 mt-5 w-100">
               Iniciar Sesión
             </Button>
