@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { login } from '../services/authService'
 import { Form, Button } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import SignUpForm from '../components/SignUpForm'
+import SignUpForm from './SignUpForm'
 
 const LoginForm = () => {
 
@@ -13,6 +13,10 @@ const LoginForm = () => {
 
   const handleEmailChange = (event) => setEmail(event.target.value)
   const handlePasswordChange = (event) => setPassword(event.target.value)
+
+  // useEffect(() => {
+  //   localStorage.clear();
+  // }, []);
 
   // const handleLogin = (email, password) => async (event) => {
   //   event.preventDefault()

@@ -12,6 +12,7 @@ const getUsers = () => {
     const request = axios.get(usersURL)
     return request
         .then(response => response.data)
-    console.log(respones.data);
     
 }
+
+export {getUsers}
