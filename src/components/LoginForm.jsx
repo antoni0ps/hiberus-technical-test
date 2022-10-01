@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { login } from '../services/authService'
 import { Form, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import SignUpForm from '../components/SignUpForm'
 
 const LoginForm = () => {
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => setEmail(event.target.value)
   const handlePasswordChange = (event) => setPassword(event.target.value)
@@ -30,6 +33,7 @@ const LoginForm = () => {
     }).then((res) => {
       localStorage.setItem('token', res.accessToken)
       const accessToken = localStorage.getItem('token')
+      navigate('/user-list')
       console.log(accessToken)
     })
   }
@@ -64,11 +68,11 @@ const LoginForm = () => {
             />
           </Form.Group>
 
-          <Link to="/user-list">
-            <Button type="submit" className="btn btn-primary mb-2 mt-5 w-100">
+          {/* <Link to="/user-list"> */}
+            <Button type="submit" onClick={handleLogin} className="btn btn-primary mb-2 mt-5 w-100">
               Iniciar Sesión
             </Button>
-          </Link>
+          
         </div>
       </Form>
     </div>
