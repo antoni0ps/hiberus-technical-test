@@ -1,3 +1,14 @@
+import React from 'react';
+
+const UsersList = () => {
+    return (
+        <div>
+            <h1>Lista de usuarios</h1>
+        </div>
+    );
+}
+
+export default UsersList;
 
 
 

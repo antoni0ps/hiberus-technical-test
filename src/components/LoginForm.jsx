@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import {login} from '../services/authService'
+import { login } from '../services/authService'
 import { Form, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import SignUpForm from '../components/SignUpForm'
 
 const LoginForm = () => {
   const [email, setEmail] = useState('')
@@ -16,64 +18,60 @@ const LoginForm = () => {
   //   const token = res.accessToken;
   //   localStorage.setItem('token', token);
 
-
   //   console.log(res);
-    
+
   // }
 
   const handleLogin = (email, password) => (event) => {
-    event.preventDefault();
+    event.preventDefault()
     login({
       email: email,
-      password: password
-    }).then(res => {
-      localStorage.setItem('token', res.accessToken);
+      password: password,
+    }).then((res) => {
+      localStorage.setItem('token', res.accessToken)
       const accessToken = localStorage.getItem('token')
-      console.log(accessToken);
-      
-      
+      console.log(accessToken)
     })
   }
 
-
-
   return (
     <div className="container">
-        <Form className="form" onSubmit={handleLogin(email, password)}>
-          <div className="form-content">
-            <h3 className="form-title">Inicia Sesión</h3>
-            <div className="text-center">
-              ¿Todavía no te has registrado?{" "}
-              <span className="link-primary">
-                Hazlo Aquí
-              </span>
-            </div>
-            <Form.Group className="mt-3">
-              <label>Correo electrónico</label>
-            <Form.Control
-                onChange={handleEmailChange}
-                type="email"
-                className="mt-1"
-                placeholder=""
-              />
-            </Form.Group>
-            <Form.Group className="mt-3">
-              <label>Contraseña</label>
-            <Form.Control
-                onChange={handlePasswordChange}
-                type="password"
-                className="mt-1"
-                placeholder=""
-              />
-          </Form.Group>
-          
-            <Button type="submit" className="btn btn-primary mb-2 mt-5 w-100">
-            Iniciar Sesión
-          </Button>
-            
+      <Form className="form" onSubmit={handleLogin(email, password)}>
+        <div className="form-content">
+          <h3 className="form-title">Inicia Sesión</h3>
+          <div className="text-center">
+            ¿Todavía no te has registrado?{' '}
+            <Link to="signUp" element={<SignUpForm />}>
+              <span className="link-primary">Hazlo Aquí</span>
+              </Link>
           </div>
-        </Form>
-      </div>
+          <Form.Group className="mt-3">
+            <label>Correo electrónico</label>
+            <Form.Control
+              onChange={handleEmailChange}
+              type="email"
+              className="mt-1"
+              placeholder=""
+            />
+          </Form.Group>
+          <Form.Group className="mt-3">
+            <label>Contraseña</label>
+            <Form.Control
+              onChange={handlePasswordChange}
+              type="password"
+              className="mt-1"
+              placeholder=""
+            />
+          </Form.Group>
+
+          <Link to="/user-list">
+            <Button type="submit" className="btn btn-primary mb-2 mt-5 w-100">
+              Iniciar Sesión
+            </Button>
+          </Link>
+        </div>
+      </Form>
+    </div>
   )
 }
 
