@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { deleteUser, getUsers } from '../services/userService';
 
+const ModalDelete = ({ id, setUsers }) => {
 
-
-
-const ModalDelete = ({id, setUsers}) => {
+    const styleRed = {
+        fontSize: "1.2em",
+        color: "tomato"
+    }
 
     const [show, setShow] = useState(false);
 
@@ -22,7 +24,7 @@ const ModalDelete = ({id, setUsers}) => {
     return (
         <>
             {/* AGREGAR VALIDACIONES!!! */}
-            <i onClick={handleShow} className="bi bi-trash3"></i>
+            <i onClick={handleShow} style={styleRed} className="bi bi-trash3"></i>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>

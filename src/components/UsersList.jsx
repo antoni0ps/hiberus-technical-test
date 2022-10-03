@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import { getUsers } from '../services/userService.js';
+import { getUsers, getUserData } from '../services/userService.js';
 import UserCard from './UserCard.jsx';
 
 const UsersList = () => {
 
   const [users, setUsers] = useState([]);
+  const [activeID, setActiveID] = useState('');
   
   const getData = async () => {
     const {items} = await getUsers()
     return items;
+  }
 
+  const activeUserID = async () => {
+    const { id } = await getUserData()
+    setActiveID(id)
+    return id;
   }
 
   useEffect(() => {
-    getData().then(items => setUsers(items))
+    getData().then(items => {
+      setUsers(items)
+      activeUserID()
+    })
   }, [setUsers]);
 
 
@@ -30,6 +39,7 @@ const UsersList = () => {
               id={user.id}
               password={user.password}
               setUsers={setUsers}
+              activeID={activeID}
               />
           ))}
         </div>

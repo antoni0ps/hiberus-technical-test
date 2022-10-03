@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { updateUser } from '../services/userService';
-import { getUsers } from '../services/userService';
+import { updateUser, getUsers } from '../services/userService';
 
 const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
+
+    const styleGreen = {
+        fontSize: "1.2em",
+        color: "darkGreen"
+    }
 
     const [show, setShow] = useState(false);
     const [newName, setNewName] = useState('');
@@ -47,7 +51,7 @@ const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
         <>
             {/* AGREGAR VALIDACIONES!!!!!!!!! */}
 
-            <i className="bi bi-pencil" onClick={handleShow}></i>
+            <i className="bi bi-pencil" style={styleGreen} onClick={handleShow}></i>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -81,13 +85,14 @@ const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
                             />
                         </Form.Group>
                         <Form.Group>
+                        <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>
                                 Cancelar
                             </Button>
                             <Button type='submit' variant="primary">
                                 Guardar
                             </Button>
-
+                        </Modal.Footer>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
