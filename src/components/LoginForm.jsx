@@ -35,10 +35,10 @@ const LoginForm = () => {
       email: email,
       password: password,
     }).then((res) => {
-      localStorage.setItem('token', res.accessToken)
-      const accessToken = localStorage.getItem('token')
-      navigate('/user-list')
-      console.log(accessToken)
+      localStorage.setItem('token', res.accessToken);
+      const accessToken = localStorage.getItem('token');
+      window.location.reload();
+      console.log(accessToken);
     })
   }
 

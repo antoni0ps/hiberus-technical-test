@@ -3,7 +3,7 @@ import Router from './routes/Router'
 import { useState, useEffect } from 'react'
 
 function App() {
-  
+
   const [activeUser, setActiveUser] = useState(null)
 
 
@@ -16,7 +16,9 @@ function App() {
   }, [])
 
   return (
-    <Router activeUser={activeUser} setActiveUser={ setActiveUser } />
+    <>
+      <Router activeUser={activeUser} setActiveUser={setActiveUser} />
+    </>
   )
 }
 
