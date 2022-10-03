@@ -5,28 +5,32 @@ const signUpURL = 'http://51.38.51.187:5050/api/v1/auth/sign-up'
 
 const login = (credentials) => {
   const request = axios.post(loginURL, credentials)
+  let msg = 'Error';
   return request
     .then((response) => response.data)
     .catch((error) => {
       if (error.response.status === 404) {
-        alert('Usuario o contraseña incorrectos')
+        msg = 'Usuario o contraseña incorrectos';
       } else if (error.response.status === 601) {
-        alert('El usuario no está validado')
+        msg = 'El usuario no está validado';
       }
+      throw new Error(msg);
     })
 }
 
 
 const signUp = (credentials) => {
   const request = axios.post(signUpURL, credentials)
+  let msg = '';
   return request
     .then(({ data }) => data)
     .catch((error) => {
       if (error.response.status === 409) {
-        alert('El email ya existe')
+        msg = 'El email ya existe'
       } else {
-        alert('Ha ocurrido un error')
+        msg = 'Ha ocurrido un error desconocido'
       }
+      throw new Error(msg);
     })
 }
 

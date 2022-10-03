@@ -1,24 +1,19 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
+import ModalDelete from './ModalDelete';
+import ModalUpdate from './ModalUpdate';
 
-const UserCard = ({ name, surname, email, id }) => {
+
+const UserCard = ({ name, surname, email, id, setUsers }) => {
     
-
-
     return (
-        <Card className='row mt-2 col-8 justify-content-center'>
+
+        <Card className='row mt-2 col-7 mx-auto'>
             <Card.Body className='row justify-content-center'>
-                
-                <span className='col-4 '>{`${name} ${surname}`}</span>
-                <span className='col-4'>{`${email}`}</span>
-                <span className='col-1'>
-                    <Button>Editar</Button>
-                    
-                </span>
-                <span className='m-0 ml-2 col-1'>
-                    <Button className='btn btn-danger'>Eliminar</Button>
-                </span>
+                <span className='col-4 mx-auto '>{`${name} ${surname}`}</span>
+                <span className='col-4 mx-auto'>{`${email}`}</span>
+                <span className='col-1'><ModalUpdate id={id} name={name} surname={surname} email={email} setUsers={setUsers} /></span>
+                <span className='col-1'><ModalDelete setUsers={setUsers} id={id} /></span>
             </Card.Body>
         </Card>
     );

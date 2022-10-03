@@ -10,6 +10,8 @@ const RegisterForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const [message, setMessage] = useState('');
+
   const handleChangeName = (event) => setName(event.target.value)
   const handleChangeSurname = (event) => setSurname(event.target.value)
   const handleChangeEmail = (event) => setEmail(event.target.value)
@@ -26,7 +28,12 @@ const RegisterForm = () => {
       password
     }).then(
       navigate('/')
-    )
+    ).catch(error => {
+      setMessage(error.message);
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
+    })
   }
 
   return (

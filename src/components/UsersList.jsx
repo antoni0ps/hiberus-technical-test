@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { getUsers } from '../services/userService.js';
-import { Button } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom';
 import UserCard from './UserCard.jsx';
 
 const UsersList = () => {
@@ -10,19 +8,13 @@ const UsersList = () => {
   
   const getData = async () => {
     const {items} = await getUsers()
-    console.log(items);
-    
     return items;
-    
+
   }
 
   useEffect(() => {
-    // getUsers().then(({ items }) => {
-    //   setUsers(items);
-    //   })
     getData().then(items => setUsers(items))
-  }, []);
-
+  }, [setUsers]);
 
 
   return (
@@ -35,6 +27,9 @@ const UsersList = () => {
               name={user.name}
               surname={user.surname}
               email={user.email}
+              id={user.id}
+              password={user.password}
+              setUsers={setUsers}
               />
           ))}
         </div>

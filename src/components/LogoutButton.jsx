@@ -9,6 +9,8 @@ const LogoutButton = ({setActiveUser}) => {
     const styles = {
         minWidth: '80px',
         fontWeight: '600',
+        maxHeight: '40px',
+        maxWidth: '150px'
     }
     
     const navigate = useNavigate();
@@ -22,7 +24,7 @@ const LogoutButton = ({setActiveUser}) => {
 
 
     return (
-        <Button className='btn btn-danger col-1 m-2 justify-content-center' style={styles} onClick={handleClick}>
+        <Button className='btn btn-danger col-2 m-2 justify-content-center' style={styles} onClick={handleClick}>
             Logout
         </Button>
     );
