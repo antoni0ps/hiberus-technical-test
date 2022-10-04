@@ -1,28 +1,41 @@
 import React, { useState } from 'react'
 import { login } from '../services/authService'
 import { Form, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import toast, { Toaster } from 'react-hot-toast'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
+import { getUsers, getUserData } from '../services/userService'
+import { useTokenContext } from '../context/UserContext'
 
-const LoginForm = () => {
+const LoginForm = ({users, setUsers}) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { setTokenContext, setLoggedUser } = useTokenContext()
+  
+
+  const navigate = useNavigate()
+
   const handleEmailChange = (event) => setEmail(event.target.value)
   const handlePasswordChange = (event) => setPassword(event.target.value)
 
-  const handleLogin = (email, password) => (event) => {
-    event.preventDefault()
-    login({
-      email: email,
-      password: password,
-    }).then((res) => {
-      localStorage.setItem('token', res.accessToken);
-      window.location.reload()
-    }).catch(error => {
-      toast.error(error.message)
-    })
+
+  const handleLogin = (email, password) => async (event) => {
+    event.preventDefault();
+    const response =
+      await login({
+        email: email,
+        password: password
+      })
+    setTokenContext(response.accessToken)
+    if (response) {
+      localStorage.setItem('token', response.accessToken)
+      const userList = await getUsers(response.accessToken)
+      const tempUser = await getUserData(response.accessToken)
+      setLoggedUser(tempUser)
+      setUsers(userList.items)
+      navigate("/user-list")
+    } 
   }
 
 
@@ -31,7 +44,7 @@ const LoginForm = () => {
       <div><Toaster
         position='top-center' />
       </div>
-      <div className="container">
+      <div className="containerAuth">
         <Form className="form" onSubmit={handleLogin(email, password)}>
           <div className="form-content">
             <h3 className="form-title">Inicia Sesión</h3>
