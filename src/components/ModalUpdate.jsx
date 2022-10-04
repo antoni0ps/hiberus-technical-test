@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import toast, { Toaster } from 'react-hot-toast';
 import { updateUser, getUsers } from '../services/userService';
 
 const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
@@ -13,6 +14,7 @@ const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
     const [newName, setNewName] = useState('');
     const [newSurname, setNewSurname] = useState('');
     const [newEmail, setNewEmail] = useState('');
+
 
     const handleChangeName = (event) => {
         event.preventDefault();
@@ -42,15 +44,21 @@ const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
         }).then(() => {
             getUsers().then(({ items }) => {
                 setUsers(items)
+                toast.success("Usuario editado con éxito")
+                handleClose();
+            }).catch(error => {
+                toast.error(error.message)
             })
-            handleClose();
         })
     }
 
     return (
         <>
-            {/* AGREGAR VALIDACIONES!!!!!!!!! */}
-
+            <div>
+                <Toaster 
+                    position='top-center'
+                />
+            </div>
             <i className="bi bi-pencil" style={styleGreen} onClick={handleShow}></i>
 
             <Modal show={show} onHide={handleClose}>
@@ -61,7 +69,7 @@ const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
                 <Modal.Body>
                     <Form onSubmit={handleUpdate(newName,newSurname, newEmail)}>
                         <Form.Group className="mb-3" >
-                            <Form.Label>Escribe un nuevo nombre</Form.Label>
+                            <Form.Label>Nuevo nombre</Form.Label>
                             <Form.Control
                                 onChange={handleChangeName}
                                 type="text"
@@ -70,7 +78,7 @@ const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Escribe un nuevo apellido</Form.Label>
+                            <Form.Label>Nuevo apellido</Form.Label>
                             <Form.Control
                                 onChange={handleChangeSurname}
                                 type="text"
@@ -78,7 +86,7 @@ const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Escribe un nuevo email</Form.Label>
+                            <Form.Label>Nuevo email</Form.Label>
                             <Form.Control
                                 onChange={handleChangeEmail}
                                 type="email"

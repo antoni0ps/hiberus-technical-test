@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { signUp } from '../services/authService'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
 
 
@@ -17,8 +17,6 @@ const RegisterForm = () => {
   const handleChangeSurname = (event) => setSurname(event.target.value)
   const handleChangeEmail = (event) => setEmail(event.target.value)
   const handleChangePassword = (event) => setPassword(event.target.value)
-
-  const navigate = useNavigate();
 
   const handleSignUp = (name, surname, email, password) => (event) => {
     event.preventDefault();

@@ -8,7 +8,6 @@ const LoginForm = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
 
   const handleEmailChange = (event) => setEmail(event.target.value)
   const handlePasswordChange = (event) => setPassword(event.target.value)
@@ -22,13 +21,10 @@ const LoginForm = () => {
       localStorage.setItem('token', res.accessToken);
       window.location.reload()
     }).catch(error => {
-      setMessage(error.message);
       toast.error(error.message)
-      return (
-        error.message
-      )
     })
   }
+
 
   return (
     <div>

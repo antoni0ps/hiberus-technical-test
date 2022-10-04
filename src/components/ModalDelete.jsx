@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import toast, { Toaster } from 'react-hot-toast';
 import { deleteUser, getUsers } from '../services/userService';
 
 const ModalDelete = ({ id, setUsers }) => {
@@ -15,15 +16,23 @@ const ModalDelete = ({ id, setUsers }) => {
     const handleShow = () => setShow(true);
 
     const handleDelete = async () => {
-        await deleteUser(id);
-        const { items } = await getUsers();
-        setUsers(items)
-        handleClose();
+        try {
+            await deleteUser(id);
+            const { items } = await getUsers();
+            setUsers(items)
+            handleClose()    
+        } catch (error) {
+            toast.error(error.message);
+        }
     }
 
     return (
         <>
-            {/* AGREGAR VALIDACIONES!!! */}
+            <div>
+                <Toaster 
+                    position='top-center'
+                />
+            </div>
             <i onClick={handleShow} style={styleRed} className="bi bi-trash3"></i>
 
             <Modal show={show} onHide={handleClose}>

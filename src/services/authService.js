@@ -34,7 +34,6 @@ const signUp = (credentials) => {
       } else {
         msg = 'Ha ocurrido un error desconocido'
       }
-      throw new Error(msg);
     })
 }
 
