@@ -1,4 +1,5 @@
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const loginURL = 'http://51.38.51.187:5050/api/v1/auth/log-in'
 const signUpURL = 'http://51.38.51.187:5050/api/v1/auth/sign-up'
@@ -10,9 +11,9 @@ const login = (credentials) => {
     .then((response) => response.data)
     .catch((error) => {
       if (error.response.status === 404) {
-        msg = 'Usuario o contraseña incorrectos';
+        toast.error('Usuario o contraseña incorrectos')
       } else if (error.response.status === 601) {
-        msg = 'El usuario no está validado';
+        toast.error('El usuario no está validado');
       }
       throw new Error(msg);
     })
@@ -30,10 +31,11 @@ const signUp = (credentials) => {
     })
     .catch((error) => {
       if (error.response.status === 409) {
-        msg = 'El email ya existe'
+        toast.error('El email ya existe');
       } else {
-        msg = 'Ha ocurrido un error desconocido'
+        toast.error('Ha ocurrido un error desconocido')
       }
+      throw new Error(msg)
     })
 }
 

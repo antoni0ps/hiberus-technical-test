@@ -27,7 +27,7 @@ const ModalLogout = ({ setActiveUser }) => {
         <>
             {/* AGREGAR VALIDACIONES!!! */}
             
-            <Button className='btn btn-danger col-2 m-2 justify-content-center' style={styles} onClick={handleShow}>
+            <Button className='btn btn-danger col-md-2 col-12 mt-2 mb-2 justify-content-center' style={styles} onClick={handleShow}>
                 Logout
             </Button>
 

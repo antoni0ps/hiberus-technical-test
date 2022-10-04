@@ -1,8 +1,11 @@
 .App {
   background-color: white;
+  overflow: hidden;
+  scrollbar-width: none;
 }
 
-.container {
+.containerAuth {
+  background-color: #153962;
   position: fixed x;
   position: fixed y;
   display: flex;
@@ -44,11 +47,12 @@ i{
   cursor: pointer;
 }
 
-.redMessage{
-  margin-top: 10px;
-  text-align: center;
-  color: white;
-  background-color: red;
-  opacity: 50%;
-  border-radius: 5px;
+.scroll {
+  overflow: scroll;
+  height: 86vh;
+}
+
+.scroll::-webkit-scrollbar {
+  -webkit-appearance: none;
+  
 }
