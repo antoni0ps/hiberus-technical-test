@@ -23,7 +23,11 @@ const signUp = (credentials) => {
   const request = axios.post(signUpURL, credentials)
   let msg = '';
   return request
-    .then(({ data }) => data)
+    .then(({ data }) => {
+      if (data !== null) {
+        return data
+      }
+    })
     .catch((error) => {
       if (error.response.status === 409) {
         msg = 'El email ya existe'

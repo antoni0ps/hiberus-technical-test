@@ -15,7 +15,8 @@ const getUsers = () => {
     return request
         .then(response => response.data)
         .catch(error => {
-            if (error.response.status === 401) {        //AGREGAR mensajes error
+            if (error.response.status === 401) {
+                   //AGREGAR mensajes error
             }
         })
 }

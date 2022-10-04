@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { signUp } from '../services/authService'
 import { Link, useNavigate } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast'
 
 
 const RegisterForm = () => {
+
   const [name, setName] = useState('')
   const [surname, setSurname] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const [message, setMessage] = useState('');
 
   const handleChangeName = (event) => setName(event.target.value)
   const handleChangeSurname = (event) => setSurname(event.target.value)
@@ -26,18 +27,22 @@ const RegisterForm = () => {
       surname,
       email,
       password
-    }).then(
-      navigate('/')
+    }).then(res => {
+      if (res.status !== 409) {
+        toast.success("Usuario registrado con éxito")
+        event.target.reset();
+      }
+    }
     ).catch(error => {
-      setMessage(error.message);
-      setTimeout(() => {
-        setMessage('');
-      }, 3000);
+      toast.error(error.message)
     })
   }
 
   return (
     <div className="container">
+      <div><Toaster
+        position='top-center' />
+      </div>
       <Form className="form" onSubmit={handleSignUp(name, surname, email, password)}>
         <div className="form-content">
           <h3 className="form-title">Regístrate</h3>
@@ -53,6 +58,7 @@ const RegisterForm = () => {
               onChange={handleChangeName}
               type="text"
               className="mt-1"
+              required
             />
           </Form.Group>
           <Form.Group className="mt-3">
@@ -61,6 +67,7 @@ const RegisterForm = () => {
               onChange={handleChangeSurname}
               type="text"
               className="mt-1"
+              required
             />
           </Form.Group>
           <Form.Group className="mt-3">
@@ -69,6 +76,7 @@ const RegisterForm = () => {
               onChange={handleChangeEmail}
               type="email"
               className="mt-1"
+              required
             />
           </Form.Group>
           <Form.Group className="mt-3">
@@ -77,6 +85,7 @@ const RegisterForm = () => {
               onChange={handleChangePassword}
               type="password"
               className="mt-1"
+              required
             />
           </Form.Group>
 
