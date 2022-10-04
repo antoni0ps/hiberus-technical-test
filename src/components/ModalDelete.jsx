@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
+import { useTokenContext } from '../context/UserContext';
 import { deleteUser, getUsers } from '../services/userService';
 
 const ModalDelete = ({ id, setUsers }) => {
@@ -11,25 +12,31 @@ const ModalDelete = ({ id, setUsers }) => {
     }
 
     const [show, setShow] = useState(false);
+    const { tokenContext, setTokenContext } = useTokenContext();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const handleDelete = async () => {
-        try {
-            await deleteUser(id);
-            const { items } = await getUsers();
-            setUsers(items)
-            handleClose()    
-        } catch (error) {
-            toast.error(error.message);
-        }
+    const handleDelete = (event) => {
+        event.preventDefault();
+        deleteUser(tokenContext, id)
+            .then(() => {
+                getUsers(tokenContext).then(({ items }) => {
+                    setUsers(items);
+                    toast.success("Usuario eliminado")
+                    handleClose()
+                }).catch(error => {
+                    toast.error(error.message)
+                })
+            })
     }
+
+
 
     return (
         <>
             <div>
-                <Toaster 
+                <Toaster
                     position='top-center'
                 />
             </div>

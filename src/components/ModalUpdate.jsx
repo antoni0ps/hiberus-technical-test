@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
+import { useTokenContext } from '../context/UserContext';
 import { updateUser, getUsers } from '../services/userService';
 
 const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
@@ -14,6 +15,8 @@ const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
     const [newName, setNewName] = useState('');
     const [newSurname, setNewSurname] = useState('');
     const [newEmail, setNewEmail] = useState('');
+
+    const { tokenContext, setTokenContext } = useTokenContext();
 
 
     const handleChangeName = (event) => {
@@ -37,12 +40,12 @@ const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
 
     const handleUpdate = (newName, newSurname, newEmail) => (event) => {
         event.preventDefault();
-        updateUser(id, {
+        updateUser(tokenContext, id, {
             name: newName,
             surname: newSurname,
             email: newEmail,
         }).then(() => {
-            getUsers().then(({ items }) => {
+            getUsers(tokenContext).then(({ items }) => {
                 setUsers(items)
                 toast.success("Usuario editado con éxito")
                 handleClose();

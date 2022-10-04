@@ -1,35 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import { getUsers, getUserData } from '../services/userService.js';
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useTokenContext } from '../context/UserContext.jsx';
+import {  getUsers } from '../services/userService.js';
 import UserCard from './UserCard.jsx';
 
-const UsersList = () => {
+const UsersList = ({users, setUsers, activeUser}) => {
 
-  const [users, setUsers] = useState([]);
-  const [activeID, setActiveID] = useState('');
+  const { tokenContext, loggedUser } = useTokenContext()
+  const navigate = useNavigate();
   
-  const getData = async () => {
-    const {items} = await getUsers()
-    return items;
-  }
-
-  const activeUserID = async () => {
-    const { id } = await getUserData()
-    setActiveID(id)
-    return id;
-  }
-
   useEffect(() => {
-    getData().then(items => {
-      setUsers(items)
-      activeUserID()
-    })
-  }, [setUsers]);
+    
+    if (tokenContext) {
+      getUsers(tokenContext).then(data => {
+        return data
+      }).then((data) => {
+        setUsers(data.items)
+      })
+    } else {
+      navigate("/")
+    }
+  }, []);
 
-
+        
   return (
     
-        <div className='justify-content-center'>
-          {users.map(user => (
+        <div className='justify-content-center scroll'>
+          {users.map(user => 
         
             <UserCard
               key={user.id}
@@ -39,9 +36,9 @@ const UsersList = () => {
               id={user.id}
               password={user.password}
               setUsers={setUsers}
-              activeID={activeID}
+              activeID={loggedUser.id}
               />
-          ))}
+          )}
         </div>
     
   )
