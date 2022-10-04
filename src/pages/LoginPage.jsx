@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 import { login } from '../services/authService'
 import { Form, Button } from 'react-bootstrap'
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const LoginForm = () => {
 
@@ -9,24 +9,8 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
-
   const handleEmailChange = (event) => setEmail(event.target.value)
   const handlePasswordChange = (event) => setPassword(event.target.value)
-
-  // useEffect(() => {
-  //   localStorage.clear();
-  // }, []);
-
-  // const handleLogin = (email, password) => async (event) => {
-  //   event.preventDefault()
-  //   const res = await authService.login({ email, password });
-
-  //   const token = res.accessToken;
-  //   localStorage.setItem('token', token);
-
-  //   console.log(res);
-
-  // }
 
   const handleLogin = (email, password) => (event) => {
     event.preventDefault()

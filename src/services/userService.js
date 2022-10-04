@@ -4,14 +4,14 @@ const token = localStorage.getItem('token');
 
 axios.defaults.headers.common = { 'Authorization': `Bearer ${token}` };
 
+const baseURL = 'http://51.38.51.187:5050/api/v1/users';
 
-const usersURL = 'http://51.38.51.187:5050/api/v1/users';
 const userMeURL = 'http://51.38.51.187:5050/api/v1/users/me';
 const updateAndDeleteURL = 'http://51.38.51.187:5050/api/v1/users/'
 
 
 const getUsers = () => {
-    const request = axios.get(usersURL)
+    const request = axios.get(baseURL)
     return request
         .then(response => response.data)
         .catch(error => {
@@ -21,14 +21,14 @@ const getUsers = () => {
 }
 
 const getUserData = () => {
-    const request = axios.get(userMeURL);
+    const request = axios.get(`${baseURL}/me`);
     return request.then(response => {
         return response.data          // AGREGAR CATCH Y TOAST
     });
 }
 
 const deleteUser = (id) => {
-    const request = axios.delete(`${updateAndDeleteURL}${id}`);
+    const request = axios.delete(`${baseURL}/${id}`);
     return request.then(response => response.data
     ).catch(error => {
         if (error.response.status === 404) {
@@ -38,7 +38,7 @@ const deleteUser = (id) => {
 }
 
 const updateUser = (id, data) => {
-    const request = axios.put(`${updateAndDeleteURL}${id}`, data)
+    const request = axios.put(`${baseURL}/${id}`, data)
     return request.then(response => {
         console.log(response.data);
         

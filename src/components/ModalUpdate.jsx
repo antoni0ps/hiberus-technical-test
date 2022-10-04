@@ -57,31 +57,32 @@ const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
                 <Modal.Header closeButton>
                     <Modal.Title>Modificar Usuario</Modal.Title>
                 </Modal.Header>
+                    <span className='mx-auto mt-2'>{`${name} ${surname} | ${email}`}</span>
                 <Modal.Body>
                     <Form onSubmit={handleUpdate(newName,newSurname, newEmail)}>
                         <Form.Group className="mb-3" >
                             <Form.Label>Escribe un nuevo nombre</Form.Label>
                             <Form.Control
-                                defaultValue={name}
                                 onChange={handleChangeName}
                                 type="text"
                                 autoFocus
+                                required
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Escribe un nuevo apellido</Form.Label>
                             <Form.Control
-                                defaultValue={surname}
                                 onChange={handleChangeSurname}
                                 type="text"
+                                required
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Escribe un nuevo email</Form.Label>
                             <Form.Control
-                                defaultValue={email}
                                 onChange={handleChangeEmail}
                                 type="email"
+                                required
                             />
                         </Form.Group>
                         <Form.Group>

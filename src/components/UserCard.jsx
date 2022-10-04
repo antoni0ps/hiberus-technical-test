@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ModalDelete from './ModalDelete';
 import ModalUpdate from './ModalUpdate';
@@ -19,8 +19,9 @@ const UserCard = ({ name, surname, email, id, setUsers, activeID }) => {
                 :
                 <Card.Body className='row justify-content-center'>
                     <span className='col-4 mx-auto '>{`${name} ${surname}`}</span>
-                    <span className='col-4 mx-auto'>{`${email}`}</span>
+                    <span className='col-3 mx-auto'>{`${email}`}</span>
                     <span className='col-2'><mark className='text-success '>Usuario Activo</mark></span>
+                    <span className='col-1'><ModalUpdate id={id} name={name} surname={surname} email={email} setUsers={setUsers} /></span>
                 </Card.Body>}
         </Card>
     );
