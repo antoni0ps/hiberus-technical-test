@@ -37,7 +37,7 @@ const RegisterForm = () => {
   }
 
   return (
-    <div className="container">
+    <div className="containerAuth">
       <div><Toaster
         position='top-center' />
       </div>
