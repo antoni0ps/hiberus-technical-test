@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
 import { useTokenContext } from '../context/UserContext';
@@ -12,7 +12,7 @@ const ModalDelete = ({ id, setUsers }) => {
     }
 
     const [show, setShow] = useState(false);
-    const { tokenContext, setTokenContext } = useTokenContext();
+    const { tokenContext } = useTokenContext();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -31,8 +31,6 @@ const ModalDelete = ({ id, setUsers }) => {
             })
     }
 
-
-
     return (
         <>
             <div>
@@ -40,6 +38,7 @@ const ModalDelete = ({ id, setUsers }) => {
                     position='top-center'
                 />
             </div>
+            
             <i onClick={handleShow} style={styleRed} className="bi bi-trash3"></i>
 
             <Modal show={show} onHide={handleClose}>

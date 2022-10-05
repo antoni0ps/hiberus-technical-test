@@ -1,24 +1,22 @@
 import React, { useState } from 'react'
 import { login } from '../services/authService'
 import { Form, Button } from 'react-bootstrap'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { getUsers, getUserData } from '../services/userService'
 import { useTokenContext } from '../context/UserContext'
 
-const LoginForm = ({users, setUsers}) => {
+const LoginForm = ({setUsers}) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const { setTokenContext, setLoggedUser } = useTokenContext()
   
-
   const navigate = useNavigate()
 
   const handleEmailChange = (event) => setEmail(event.target.value)
   const handlePasswordChange = (event) => setPassword(event.target.value)
-
 
   const handleLogin = (email, password) => async (event) => {
     event.preventDefault();
@@ -37,8 +35,7 @@ const LoginForm = ({users, setUsers}) => {
       navigate("/user-list")
     } 
   }
-
-
+  
   return (
     <div>
       <div><Toaster

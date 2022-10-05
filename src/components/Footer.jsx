@@ -8,7 +8,6 @@ const Footer = () => {
         height: "68px"
     }
 
-
     return (
         <div className='d-flex align-items-center justify-content-center' style={style}>
             <h6>HIBERUS TECHNICAL TEST  |  Antonio Piñero Sánchez</h6>

@@ -3,7 +3,6 @@ import Card from 'react-bootstrap/Card';
 import ModalDelete from './ModalDelete';
 import ModalUpdate from './ModalUpdate';
 
-
 const UserCard = ({ name, surname, email, id, setUsers, activeID }) => {
     
     return (

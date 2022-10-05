@@ -16,7 +16,7 @@ const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
     const [newSurname, setNewSurname] = useState('');
     const [newEmail, setNewEmail] = useState('');
 
-    const { tokenContext, setTokenContext } = useTokenContext();
+    const { tokenContext} = useTokenContext();
 
 
     const handleChangeName = (event) => {
@@ -62,6 +62,7 @@ const ModalUpdate = ({ id, name, surname, email, setUsers }) => {
                     position='top-center'
                 />
             </div>
+
             <i className="bi bi-pencil" style={styleGreen} onClick={handleShow}></i>
 
             <Modal show={show} onHide={handleClose}>

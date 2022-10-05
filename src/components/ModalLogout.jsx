@@ -12,7 +12,6 @@ const ModalLogout = ({ setActiveUser }) => {
     }
 
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const navigate = useNavigate();
@@ -25,8 +24,6 @@ const ModalLogout = ({ setActiveUser }) => {
 
     return (
         <>
-            {/* AGREGAR VALIDACIONES!!! */}
-            
             <Button className='btn btn-danger col-md-2 col-12 mt-2 mb-2 justify-content-center' style={styles} onClick={handleShow}>
                 Logout
             </Button>

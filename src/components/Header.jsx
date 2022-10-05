@@ -11,7 +11,7 @@ const Header = ({ setActiveUser, activeUser }) => {
     }
 
     const [userEmail, setUserEmail] = useState('');
-    const { tokenContext, setTokenContext } = useTokenContext()
+    const { tokenContext} = useTokenContext()
 
     
     useEffect(() => {
